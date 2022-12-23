@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.Data.Core;
+using Domain.Data.SimpleModels;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,38 @@ namespace Domain.API.Controllers
     [ApiController]
     public class SupplierController : ControllerBase
     {
+        ISupplierCore _supplierCore;
+
+        public SupplierController(ISupplierCore supplierCore)
+        {
+            _supplierCore= supplierCore;
+        }
         // GET: api/<SupplierController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<SupplierSampleModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _supplierCore.GetSupplierList();
         }
 
         // GET api/<SupplierController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public SupplierSampleModel Get(int id)
         {
-            return "value";
+            return _supplierCore.GetSupplierById(id);
         }
 
         // POST api/<SupplierController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] SupplierSampleModel input)
         {
+             _supplierCore.SaveSupplier(input);
         }
 
         // PUT api/<SupplierController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] SupplierSampleModel input)
         {
-        }
-
-        // DELETE api/<SupplierController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            _supplierCore.UpdateSupplier(input);
         }
     }
 }

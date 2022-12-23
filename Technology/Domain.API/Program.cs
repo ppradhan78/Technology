@@ -1,5 +1,8 @@
 using Domain.Data.BusinessObjects;
 using Domain.Data.Core;
+using Domain.Data.Data;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddTransient<ISupplierBO, SupplierBO>();
 builder.Services.AddTransient<ISupplierCore, SupplierCore>();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<DomainDbContext>(x => x.UseSqlServer(connectionString));
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
