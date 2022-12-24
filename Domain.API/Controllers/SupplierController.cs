@@ -1,9 +1,4 @@
-﻿using Domain.Data.Core;
-using Domain.Data.SimpleModels;
-using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
+﻿
 namespace Domain.API.Controllers
 {
     [Route("api/[controller]")]
@@ -18,18 +13,35 @@ namespace Domain.API.Controllers
         }
         // GET: api/<SupplierController>
         [HttpGet]
-        public List<SupplierSampleModel> Get()
+        public ActionResult<IEnumerable< SupplierSampleModel>> Get()
         {
-            return _supplierCore.GetSupplierList();
+            var result= _supplierCore.GetSupplierList();
+            return Ok(result);
         }
 
         // GET api/<SupplierController>/5
         [HttpGet("{id}")]
-        public SupplierSampleModel Get(int id)
+        public async Task<ActionResult<SupplierSampleModel>> Get(int id)
         {
-            return _supplierCore.GetSupplierById(id);
+            var result = await _supplierCore.GetSupplierByIdAsync(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
         }
+        //[HttpGet("{id}")]
+        //public ActionResult<SupplierSampleModel> GetFile(int id)
+        //{
+        //    var filePath = @"F:\JobSearch\LinkedIn\SQL\1668263482372.pdf";
+        //    if (!System.IO.File.Exists(filePath))
+        //    {
+        //        return NotFound();
+        //    }
+        //    var bytes= System.IO.File.ReadAllBytes(filePath);
 
+        //    return File(bytes,"text/plain",Path.GetFileName(filePath));
+        //}
         // POST api/<SupplierController>
         [HttpPost]
         public void Post([FromBody] SupplierSampleModel input)

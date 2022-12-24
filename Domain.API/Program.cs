@@ -1,18 +1,17 @@
-using Domain.Data.BusinessObjects;
-using Domain.Data.Core;
-using Domain.Data.Data;
-using Microsoft.EntityFrameworkCore;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+//builder.Services.AddControllers(option => option.ReturnHttpNotAcceptable = true );
+//builder.Services.AddControllers(option => option.ReturnHttpNotAcceptable = true).AddXmlDataContractSerializerFormatters();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddTransient<ISupplierBO, SupplierBO>();
 builder.Services.AddTransient<ISupplierCore, SupplierCore>();
-
+builder.Services.AddSingleton<Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider>();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DomainDbContext>(x => x.UseSqlServer(connectionString));
 

@@ -1,5 +1,4 @@
-﻿using Domain.Data.BusinessObjects;
-using Domain.Data.SimpleModels;
+﻿
 
 namespace Domain.Data.Core
 {
@@ -11,9 +10,9 @@ namespace Domain.Data.Core
         {
             _supplierBO= supplierBO;
         }
-        public SupplierSampleModel GetSupplierById(int SupplierId)
+        public async Task<SupplierSampleModel> GetSupplierByIdAsync(int SupplierId)
         {
-            return _supplierBO.GetSupplierById(SupplierId);    
+            return await _supplierBO.GetSupplierByIdAsync(SupplierId);    
         }
 
         public List<SupplierSampleModel> GetSupplierList()
@@ -23,11 +22,14 @@ namespace Domain.Data.Core
 
         public bool SaveSupplier(SupplierSampleModel Input)
         {
+            ArgumentNullException.ThrowIfNull(Input);
+
            return _supplierBO.SaveSupplier(Input);
         }
 
         public bool UpdateSupplier(SupplierSampleModel Input)
         {
+            ArgumentNullException.ThrowIfNull(Input);
             return _supplierBO.UpdateSupplier(Input);
         }
     }

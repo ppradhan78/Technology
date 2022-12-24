@@ -17,3 +17,6 @@
 /Domain.Data/obj
 /Domain.Test/bin/Debug/net6.0
 /Domain.Test/obj
+/Domain.API/bin/Release/net6.0
+/Domain.Data/bin/Release/net6.0
+/Domain.Test/bin/Release/net6.0
