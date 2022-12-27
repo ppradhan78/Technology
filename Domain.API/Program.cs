@@ -2,7 +2,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddCors();
 builder.Services.AddControllers();
 //builder.Services.AddControllers(option => option.ReturnHttpNotAcceptable = true );
 //builder.Services.AddControllers(option => option.ReturnHttpNotAcceptable = true).AddXmlDataContractSerializerFormatters();
@@ -20,6 +20,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseCors(x => x
+           .AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader());
+
+app.UseHttpsRedirection();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

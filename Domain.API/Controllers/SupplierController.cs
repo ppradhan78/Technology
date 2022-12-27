@@ -20,10 +20,10 @@ namespace Domain.API.Controllers
         }
 
         // GET api/<SupplierController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<SupplierSampleModel>> Get(int id)
+        [HttpGet("{supplierID}")]
+        public async Task<ActionResult<SupplierSampleModel>> Get(int supplierID)
         {
-            var result = await _supplierCore.GetSupplierByIdAsync(id);
+            var result = await _supplierCore.GetSupplierByIdAsync(supplierID);
             if (result == null)
             {
                 return NotFound();
