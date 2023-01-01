@@ -39,25 +39,25 @@ namespace Domain.Data.BusinessObjects
         }
 
 
-        #region Private Method
-        string InterpolatedString(SupplierSampleModel input)
-        {
-            return $" {input.ContactTitle} {input.ContactName}";
-        }
-        TimeOnly GetTime()
-        {
-            return new TimeOnly(10, 0);
-        }
-        DateOnly GetDate()
-        {
-            return new DateOnly(2000, 12, 21);
-        }
-        void MaxMin()
-        {
-            List<SupplierSampleModel> lst = new List<SupplierSampleModel>();
-            lst.MaxBy(x => x.SupplierID);
-            lst.MinBy(x => x.SupplierID);
-        }
+        #region Private Method DotNet 6.0
+        //string InterpolatedString(SupplierSampleModel input)
+        //{
+        //    return $" {input.ContactTitle} {input.ContactName}";
+        //}
+        //TimeOnly GetTime()
+        //{
+        //    return new TimeOnly(10, 0);
+        //}
+        //DateOnly GetDate()
+        //{
+        //    return new DateOnly(2000, 12, 21);
+        //}
+        //void MaxMin()
+        //{
+        //    List<SupplierSampleModel> lst = new List<SupplierSampleModel>();
+        //    lst.MaxBy(x => x.SupplierID);
+        //    lst.MinBy(x => x.SupplierID);
+        //}
 
         #endregion
     }
