@@ -12,6 +12,10 @@ namespace Domain.Data.Core
         }
         public async Task<SupplierSampleModel> GetSupplierByIdAsync(int SupplierId)
         {
+            if (SupplierId<=0)
+            {
+                throw new ArgumentException("Invalid SupplierId");
+            }
             return await _supplierBO.GetSupplierByIdAsync(SupplierId);    
         }
 
